@@ -12,8 +12,11 @@
         <a href="{% url 'contact' %}">Contact</a>
         <a href="{% url 'resume' %}">Resume</a>
     </nav>
-
     <hr>
-    <h2>Here is my resume</h2>
+    <h2>{{resume.title}}</h2>
+    {% if resume %}
+    <a href="{{ resume.file }}", target="_blank">view resume</a> <br>
+    <a href="{{ resume.file }}", download="">download resume</a>
+    {% endif %}
 </body>
 </html>

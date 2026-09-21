@@ -32,10 +32,30 @@ def home(request):
     return render(request, "index.html", {"homecontent" : homecontent})
 
 def about(request):
-    return render(request,'about.html')
+    skill = Skill.objects.all()
+    return render(request,'about.html',{
+        "skills" : skill 
+    })
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        contact = request.POST.get('contact')
+
+        ContactMessage.objects.create(
+            name=name,
+            email=email,
+            contact=contact,
+            subject=subject,
+            message=message
+        )
     return render(request,'conatct.html')
 
 def resume(request):
-    return render(request,'resume.html')
+    resume = Resume.objects.first()
+    return render(request,'resume.html',{
+        "resume" : resume
+    })

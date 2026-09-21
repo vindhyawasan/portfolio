@@ -1,19 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>About Me</title>
 </head>
+
 <body>
+
+    <!-- Navbar -->
+
     <nav>
+
         <a href="{% url 'home' %}">Home</a>
+
         <a href="{% url 'about' %}">About</a>
+
         <a href="{% url 'contact' %}">Contact</a>
+
         <a href="{% url 'resume' %}">Resume</a>
+
     </nav>
 
-    <hr>
-    <h2>About Section</h2>
+
+    <!-- About Section -->
+
+    <section>
+
+        <h1>ABOUT ME</h1>
+
+        <h2>
+            Hi, I'm {{ homecontent.profile.name }}.
+        </h2>
+
+        <h3>
+            {{ homecontent.profile.title }}
+        </h3>
+
+
+        <p>
+            Hi, I'm {{ homecontent.profile.name }}, a Computer Science
+            Engineering student and aspiring Python/Django Developer
+            with a strong interest in Machine Learning and backend
+            development.
+        </p>
+
+        <p>
+            I enjoy building practical web applications and intelligent
+            solutions using technologies such as Python, Django,
+            JavaScript, HTML, CSS, SQL, and Machine Learning. I have
+            worked on projects including real-time chat applications,
+            news and weather applications, machine learning prediction
+            systems, spam email detection, customer churn prediction,
+            and demand forecasting.
+        </p>
+
+        <p>
+            I am continuously improving my skills in software development,
+            machine learning, databases, APIs, and deployment. I enjoy
+            learning new technologies, solving problems through code,
+            and turning ideas into functional applications.
+        </p>
+
+        <p>
+            My goal is to grow as a software developer and build reliable,
+            user-focused applications while continuing to explore the
+            possibilities of Machine Learning and Artificial Intelligence.
+        </p>
+
+
+        <!-- Skills -->
+
+        <h2>Skills</h2>
+
+        <ul>
+        {% for skill in skills %}
+
+            <li>{{ skill.name }}</li>
+
+        {% endfor %}
+        </ul>
+
+
+        <!-- Buttons / Links -->
+
+        <p>
+            <a href="{% url 'home' %}">
+                View My Projects
+            </a>
+        </p>
+
+        <p>
+            <a href="{% url 'resume' %}">
+                Download Resume
+            </a>
+        </p>
+
+    </section>
+
 </body>
+
 </html>
