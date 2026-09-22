@@ -32,16 +32,16 @@
         <h1>ABOUT ME</h1>
 
         <h2>
-            Hi, I'm {{ homecontent.profile.name }}.
+            Hi, I'm {{ profile.name }}.
         </h2>
 
         <h3>
-            {{ homecontent.profile.title }}
+            {{ profile.title }}
         </h3>
 
 
         <p>
-            Hi, I'm {{ homecontent.profile.name }}, a Computer Science
+            Hi, I'm {{ profile.name }}, a Computer Science
             Engineering student and aspiring Python/Django Developer
             with a strong interest in Machine Learning and backend
             development.
@@ -49,8 +49,7 @@
 
         <p>
             I enjoy building practical web applications and intelligent
-            solutions using technologies such as Python, Django,
-            JavaScript, HTML, CSS, SQL, and Machine Learning. I have
+            solutions using technologies such as {% for skill in skills %} {% if skill.name != "Machine Learning" %} {{ skill.name}}, {% endif %} {% endfor %} and Machine Learning. I have
             worked on projects including real-time chat applications,
             news and weather applications, machine learning prediction
             systems, spam email detection, customer churn prediction,

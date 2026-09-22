@@ -20,21 +20,27 @@ def home(request):
     education = Education.objects.all()
     resume = Resume.objects.all()
 
-    homecontent = {
-        "profile": profile,
-        "experience": experience,
-        "project": project,
-        "skill": skill,
-        "education": education,
-        "resume": resume
-    }
+    # homecontent = {
+    #     "profile": profile,
+    #     "experience": experience,
+    #     "project": project,
+    #     "skill": skill,
+    #     "education": education,
+    #     "resume": resume
+    # }
 
-    return render(request, "index.html", {"homecontent" : homecontent})
+    return render(request, "index.html", {#"homecontent" : homecontent,
+                                          "profile" : profile,
+                                          "skills" : skill,
+                                          "education" : education,
+                                          "projects" : project})
 
 def about(request):
     skill = Skill.objects.all()
+    profile = Profile.objects.first()
     return render(request,'about.html',{
-        "skills" : skill 
+        "skills" : skill,
+        "profile" : profile
     })
 
 def contact(request):

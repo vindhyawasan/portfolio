@@ -3,41 +3,268 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ profile.name }} - Portfolio</title>
 </head>
 
 <body>
 
-    <!-- Navbar -->
+    <!-- ================= NAVBAR ================= -->
+
     <nav>
+
         <a href="{% url 'home' %}">Home</a>
+
         <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'contact' %}">Contact</a>
+
         <a href="{% url 'resume' %}">Resume</a>
+
+        <a href="{% url 'contact' %}">Contact</a>
+
     </nav>
 
     <hr>
 
-    <!-- Profile -->
-    <h1>{{ homecontent.profile.name }}</h1>
 
-    <h2>{{ homecontent.profile.title }}</h2>
+    <!-- ================= PROFILE ================= -->
 
-    <p>{{ homecontent.profile.bio }}</p>
+    <section>
 
-    <p>Email: {{ homecontent.profile.email }}</p>
+        <h1>{{ profile.name }}</h1>
 
-    <p>Phone: {{ homecontent.profile.phone }}</p>
+        <h2>{{ profile.title }}</h2>
 
-    <p>Location: {{ homecontent.profile.location }}</p>
+        {% if profile.profile_image %}
+            <img
+                src="{{ profile.profile_image.url }}"
+                alt="{{ profile.name }}"
+                width="300"
+            >
+        {% endif %}
 
-    <p>GitHub: {{ homecontent.profile.github }}</p>
+        <p>
+            {{ profile.bio }}
+        </p>
 
-    <p>LinkedIn: {{ homecontent.profile.linkedin }}</p>
+        <p>
+            Email: {{ profile.email }}
+        </p>
 
-    <img src="/media/profile_images/port_img.jpeg"
-         alt="{{ homecontent.profile.name }}"
-         width="400">
+        <p>
+            Phone: {{ profile.phone }}
+        </p>
+
+        <p>
+            Location: {{ profile.location }}
+        </p>
+
+        <p>
+            <a href="{{ profile.github }}" target="_blank">
+                GitHub
+            </a>
+        </p>
+
+        <p>
+            <a href="{{ profile.linkedin }}" target="_blank">
+                LinkedIn
+            </a>
+        </p>
+
+    </section>
+
+    <hr>
+
+
+    <!-- ================= SKILLS ================= -->
+
+    <section>
+
+        <h2>Skills</h2>
+
+        <ul>
+
+            {% for skill in skills %}
+
+                <li>
+                    {{ skill.name }}
+                </li>
+
+            {% empty %}
+
+                <li>No skills added yet.</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </section>
+
+    <hr>
+
+
+    <!-- ================= PROJECTS ================= -->
+
+    <section>
+
+        <h2>Projects</h2>
+
+        {% for project in projects %}
+
+            <div>
+
+                <h3>{{ project.title }}</h3>
+
+                {% if project.image %}
+                    <img
+                        src="{{ project.image.url }}"
+                        alt="{{ project.title }}"
+                        width="300"
+                    >
+                {% endif %}
+
+                <p>
+                    {{ project.description }}
+                </p>
+
+                <p>
+                    Technologies:
+                    {{ project.technologies }}
+                </p>
+
+                {% if project.github_link %}
+                    <a
+                        href="{{ project.github_link }}"
+                        target="_blank"
+                    >
+                        GitHub
+                    </a>
+                {% endif %}
+
+                {% if project.link %}
+                    <a
+                        href="{{ project.link }}"
+                        target="_blank"
+                    >
+                        Live Project
+                    </a>
+                {% endif %}
+
+            </div>
+
+            <hr>
+
+        {% empty %}
+
+            <p>No projects added yet.</p>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- ================= EXPERIENCE ================= -->
+
+    <section>
+
+        <h2>Experience</h2>
+
+        {% for exp in experiences %}
+
+            <div>
+
+                <h3>{{ exp.job_title }}</h3>
+
+                <h4>{{ exp.company }}</h4>
+
+                <p>
+                    {{ exp.start_date }} -
+                    {% if exp.currently_working %}
+                        Present
+                    {% else %}
+                        {{ exp.end_date }}
+                    {% endif %}
+                </p>
+
+                <p>
+                    {{ exp.description }}
+                </p>
+
+            </div>
+
+            <hr>
+
+        {% empty %}
+
+            <p>No experience added yet.</p>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- ================= EDUCATION ================= -->
+
+    <section>
+
+        <h2>Education</h2>
+
+        {% for edu in education %}
+
+            <div>
+
+                <h3>{{ edu.degree }}</h3>
+
+                <h4>{{ edu.institution }}</h4>
+
+                <p>
+                    {{ edu.start_year }} -
+                    {{ edu.end_year }}
+                </p>
+
+                <p>
+                    {{ edu.description }}
+                </p>
+
+            </div>
+
+            <hr>
+
+        {% empty %}
+
+            <p>No education added yet.</p>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- ================= RESUME ================= -->
+
+    <section>
+
+        <h2>Resume</h2>
+
+        <p>
+            Want to know more about my education, skills and projects?
+        </p>
+
+        <a href="{% url 'resume' %}">
+            View My Resume
+        </a>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © {{ profile.name }}
+        </p>
+
+    </footer>
 
 </body>
 
