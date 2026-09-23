@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-wkfm7f5&zy)-r=750%4d1wisvkk6n9sq^pwnzu=#l-uu%za*96'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "vportfolio.cyou",
+    "www.vportfolio.cyou",
+]
 
 
 # Application definition
