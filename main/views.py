@@ -65,4 +65,4 @@ def resume(request):
     resume = Resume.objects.first()
     return render(request,'resume.html',{
         "resume" : resume
-    })
+    }) 
