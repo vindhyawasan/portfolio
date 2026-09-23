@@ -1,9 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <title>{{ profile.name }} - Portfolio</title>
 </head>
@@ -12,87 +17,88 @@
 
     <!-- ================= NAVBAR ================= -->
 
-    <nav>
+    <header class="site-header">
+        <nav class="navbar">
 
-        <a href="{% url 'home' %}">Home</a>
+            <a class="brand" href="{% url 'home' %}">{{ profile.name }}</a>
 
-        <a href="{% url 'about' %}">About</a>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'resume' %}">Resume</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
 
-        <a href="{% url 'resume' %}">Resume</a>
+            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                🌙
+            </button>
 
-        <a href="{% url 'contact' %}">Contact</a>
-
-    </nav>
-
-    <hr>
+        </nav>
+    </header>
 
 
     <!-- ================= PROFILE ================= -->
 
-    <section>
+    <section class="hero">
 
-        <h1>{{ profile.name }}</h1>
+        <div class="hero-text">
+            <p class="eyebrow">Portfolio</p>
+            <h1>{{ profile.name }}</h1>
+            <h2>{{ profile.title }}</h2>
 
-        <h2>{{ profile.title }}</h2>
+            <p class="bio">
+                {{ profile.bio }}
+            </p>
+
+            <dl class="contact-meta">
+                <div>
+                    <dt>Email</dt>
+                    <dd>{{ profile.email }}</dd>
+                </div>
+                <div>
+                    <dt>Phone</dt>
+                    <dd>{{ profile.phone }}</dd>
+                </div>
+                <div>
+                    <dt>Location</dt>
+                    <dd>{{ profile.location }}</dd>
+                </div>
+            </dl>
+
+            <div class="hero-links">
+                {% if profile.github %}
+                <a class="pill-link" href="{{ profile.github }}" target="_blank">GitHub</a>
+                {% endif %}
+                {% if profile.linkedin %}
+                <a class="pill-link" href="{{ profile.linkedin }}" target="_blank">LinkedIn</a>
+                {% endif %}
+            </div>
+        </div>
 
         {% if profile.profile_image %}
-            <img
-                src="{{ profile.profile_image.url }}"
-                alt="{{ profile.name }}"
-                width="300"
-            >
+        <div class="hero-image">
+            <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}">
+        </div>
         {% endif %}
 
-        <p>
-            {{ profile.bio }}
-        </p>
-
-        <p>
-            Email: {{ profile.email }}
-        </p>
-
-        <p>
-            Phone: {{ profile.phone }}
-        </p>
-
-        <p>
-            Location: {{ profile.location }}
-        </p>
-
-        <p>
-            <a href="{{ profile.github }}" target="_blank">
-                GitHub
-            </a>
-        </p>
-
-        <p>
-            <a href="{{ profile.linkedin }}" target="_blank">
-                LinkedIn
-            </a>
-        </p>
-
     </section>
-
-    <hr>
 
 
     <!-- ================= SKILLS ================= -->
 
-    <section>
+    <section class="section">
 
-        <h2>Skills</h2>
+        <h2 class="section-title">Skills</h2>
 
-        <ul>
+        <ul class="chip-list">
 
             {% for skill in skills %}
 
-                <li>
-                    {{ skill.name }}
-                </li>
+            <li class="chip">{{ skill.name }}</li>
 
             {% empty %}
 
-                <li>No skills added yet.</li>
+            <li class="empty-note">No skills added yet.</li>
 
             {% endfor %}
 
@@ -100,157 +106,151 @@
 
     </section>
 
-    <hr>
-
 
     <!-- ================= PROJECTS ================= -->
 
-    <section>
+    <section class="section">
 
-        <h2>Projects</h2>
+        <h2 class="section-title">Projects</h2>
 
-        {% for project in projects %}
+        <div class="card-grid">
 
-            <div>
+            {% for project in projects %}
 
-                <h3>{{ project.title }}</h3>
+            <article class="card">
 
                 {% if project.image %}
-                    <img
-                        src="{{ project.image.url }}"
-                        alt="{{ project.title }}"
-                        width="300"
-                    >
+                <div class="card-media">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                </div>
                 {% endif %}
 
-                <p>
-                    {{ project.description }}
-                </p>
+                <div class="card-body">
 
-                <p>
-                    Technologies:
-                    {{ project.technologies }}
-                </p>
+                    <h3>{{ project.title }}</h3>
 
-                {% if project.github_link %}
-                    <a
-                        href="{{ project.github_link }}"
-                        target="_blank"
-                    >
-                        GitHub
-                    </a>
-                {% endif %}
+                    <p>{{ project.description }}</p>
 
-                {% if project.link %}
-                    <a
-                        href="{{ project.link }}"
-                        target="_blank"
-                    >
-                        Live Project
-                    </a>
-                {% endif %}
+                    {% if project.technologies %}
+                    <p class="card-tech">{{ project.technologies }}</p>
+                    {% endif %}
 
-            </div>
+                    <div class="card-links">
+                        {% if project.github_link %}
+                        <a href="{{ project.github_link }}" target="_blank">Code</a>
+                        {% endif %}
 
-            <hr>
+                        {% if project.link %}
+                        <a href="{{ project.link }}" target="_blank">Live&nbsp;site</a>
+                        {% endif %}
+                    </div>
 
-        {% empty %}
+                </div>
 
-            <p>No projects added yet.</p>
+            </article>
 
-        {% endfor %}
+            {% empty %}
+
+            <p class="empty-note">No projects added yet.</p>
+
+            {% endfor %}
+
+        </div>
 
     </section>
 
 
     <!-- ================= EXPERIENCE ================= -->
 
-    <section>
+    <section class="section">
 
-        <h2>Experience</h2>
+        <h2 class="section-title">Experience</h2>
 
-        {% for exp in experiences %}
+        <div class="timeline">
 
-            <div>
+            {% for exp in experiences %}
 
-                <h3>{{ exp.job_title }}</h3>
+            <div class="timeline-item">
 
-                <h4>{{ exp.company }}</h4>
+                <div class="timeline-marker"></div>
 
-                <p>
-                    {{ exp.start_date }} -
-                    {% if exp.currently_working %}
+                <div class="timeline-content">
+                    <h3>{{ exp.job_title }}</h3>
+                    <h4>{{ exp.company }}</h4>
+
+                    <p class="timeline-date">
+                        {{ exp.start_date }} &ndash;
+                        {% if exp.currently_working %}
                         Present
-                    {% else %}
+                        {% else %}
                         {{ exp.end_date }}
-                    {% endif %}
-                </p>
+                        {% endif %}
+                    </p>
 
-                <p>
-                    {{ exp.description }}
-                </p>
+                    <p>{{ exp.description }}</p>
+                </div>
 
             </div>
 
-            <hr>
+            {% empty %}
 
-        {% empty %}
+            <p class="empty-note">No experience added yet.</p>
 
-            <p>No experience added yet.</p>
+            {% endfor %}
 
-        {% endfor %}
+        </div>
 
     </section>
 
 
     <!-- ================= EDUCATION ================= -->
 
-    <section>
+    <section class="section">
 
-        <h2>Education</h2>
+        <h2 class="section-title">Education</h2>
 
-        {% for edu in education %}
+        <div class="timeline">
 
-            <div>
+            {% for edu in education %}
 
-                <h3>{{ edu.degree }}</h3>
+            <div class="timeline-item">
 
-                <h4>{{ edu.institution }}</h4>
+                <div class="timeline-marker"></div>
 
-                <p>
-                    {{ edu.start_year }} -
-                    {{ edu.end_year }}
-                </p>
+                <div class="timeline-content">
+                    <h3>{{ edu.degree }}</h3>
+                    <h4>{{ edu.institution }}</h4>
 
-                <p>
-                    {{ edu.description }}
-                </p>
+                    <p class="timeline-date">
+                        {{ edu.start_year }} &ndash; {{ edu.end_year }}
+                    </p>
+
+                    <p>{{ edu.description }}</p>
+                </div>
 
             </div>
 
-            <hr>
+            {% empty %}
 
-        {% empty %}
+            <p class="empty-note">No education added yet.</p>
 
-            <p>No education added yet.</p>
+            {% endfor %}
 
-        {% endfor %}
+        </div>
 
     </section>
 
 
     <!-- ================= RESUME ================= -->
 
-    <section>
+    <section class="section resume-cta">
 
-        <h2>Resume</h2>
+        <h2 class="section-title">Resume</h2>
 
-        <p>
-            Want to know more about my education, skills and projects?
-        </p>
+        <p>Want the full picture &mdash; education, skills and project history in one place?</p>
 
-        <a href="{% url 'resume' %}">
-            View My Resume
+        <a class="pill-link pill-link--solid" href="{% url 'resume' %}">
+            View my resume
         </a>
 
     </section>
@@ -258,13 +258,13 @@
 
     <!-- ================= FOOTER ================= -->
 
-    <footer>
+    <footer class="site-footer">
 
-        <p>
-            © {{ profile.name }}
-        </p>
+        <p>&copy; {{ profile.name }}</p>
 
     </footer>
+
+    <script src="{% static 'js/index.js' %}"></script>
 
 </body>
 

@@ -1,9 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
 
     <title>Contact Me</title>
 </head>
@@ -12,68 +17,75 @@
 
     <!-- Navbar -->
 
-    <nav>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'contact' %}">Contact</a>
-        <a href="{% url 'resume' %}">Resume</a>
-    </nav>
+    <header class="site-header">
+        <nav class="navbar">
 
-    <hr>
+            <a class="brand" href="{% url 'home' %}">{{ profile.name }}</a>
+
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'contact' %}">Contact</a>
+                <a href="{% url 'resume' %}">Resume</a>
+            </div>
+
+            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                🌙
+            </button>
+
+        </nav>
+    </header>
+
 
     <!-- Contact Form -->
 
-    <h1>Contact Me</h1>
+    <section class="contact-hero">
 
-    <form method="POST">
+        <p class="eyebrow">Get in touch</p>
+        <h1>Contact Me</h1>
+        <p class="contact-lead">
+            Have a project in mind or just want to say hello? Fill out the
+            form below and I'll get back to you.
+        </p>
 
-        {% csrf_token %}
+        <form class="contact-form" method="POST">
 
-        <label>Name:</label>
-        <br>
+            {% csrf_token %}
 
-        <input type="text" name="name" required>
+            <div class="form-row">
+                <label for="id_name">Name</label>
+                <input id="id_name" type="text" name="name" required>
+            </div>
 
-        <br><br>
+            <div class="form-row">
+                <label for="id_email">Email</label>
+                <input id="id_email" type="email" name="email" required>
+            </div>
 
+            <div class="form-row">
+                <label for="id_subject">Subject</label>
+                <input id="id_subject" type="text" name="subject" required>
+            </div>
 
-        <label>Email:</label>
-        <br>
+            <div class="form-row">
+                <label for="id_message">Message</label>
+                <textarea id="id_message" name="message" rows="5" required></textarea>
+            </div>
 
-        <input type="email" name="email" required>
+            <div class="form-row">
+                <label for="id_contact">Contact number <span class="optional">(optional)</span></label>
+                <input id="id_contact" type="text" name="contact">
+            </div>
 
-        <br><br>
+            <button class="submit-btn" type="submit">
+                Send message
+            </button>
 
+        </form>
 
-        <label>Subject:</label>
-        <br>
+    </section>
 
-        <input type="text" name="subject" required>
-
-        <br><br>
-
-
-        <label>Message:</label>
-        <br>
-
-        <textarea name="message" rows="5" required></textarea>
-
-        <br><br>
-
-
-        <label>Contact Number:</label>
-        <br>
-
-        <input type="text" name="contact">
-
-        <br><br>
-
-
-        <button type="submit">
-            Send Message
-        </button>
-
-    </form>
+    <script src="{% static 'js/index.js' %}"></script>
 
 </body>
 

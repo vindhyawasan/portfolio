@@ -1,0 +1,604 @@
+/* =================================================================
+   Design tokens
+   ================================================================= */
+
+:root {
+    --ink: #1c2430;
+    --ink-soft: #4a5568;
+    --paper: #f6f4ef;
+    --paper-raised: #ffffff;
+    --line: #d8d2c4;
+    --accent: #2e6f6a;
+    --accent-soft: #e4efee;
+    --gold: #c9932a;
+
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --radius: 3px;
+    --content-width: 920px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+body.dark-mode {
+    --ink: #ece8de;
+    --ink-soft: #a9b0be;
+    --paper: #14181f;
+    --paper-raised: #1b2029;
+    --line: #2c3340;
+    --accent: #5fb3ac;
+    --accent-soft: #1c2b2a;
+    --gold: #dba94a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0 0 0.4em;
+    color: var(--ink);
+}
+
+p {
+    margin: 0 0 1em;
+    max-width: 65ch;
+    color: var(--ink-soft);
+}
+
+a {
+    color: var(--accent);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+hr {
+    display: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
+
+
+/* =================================================================
+   Header / nav
+   ================================================================= */
+
+.site-header {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 1.1rem var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.brand {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-decoration: none;
+    margin-right: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+#theme-toggle {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+@media (max-width: 640px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+    .nav-links {
+        order: 3;
+        width: 100%;
+        gap: 1.1rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--line);
+        margin-top: 0.75rem;
+    }
+}
+
+
+/* =================================================================
+   Hero / profile
+   ================================================================= */
+
+.hero {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 5rem) var(--gutter);
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+}
+
+.eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin: 0 0 0.75rem;
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+}
+
+.hero h2 {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+}
+
+.bio {
+    font-size: 1.05rem;
+}
+
+.contact-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.contact-meta dt {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.15rem;
+}
+
+.contact-meta dd {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink);
+}
+
+.hero-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.pill-link {
+    display: inline-block;
+    padding: 0.55rem 1.2rem;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--ink);
+}
+
+.pill-link:hover {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.pill-link--solid {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.pill-link--solid:hover {
+    opacity: 0.9;
+    background: var(--accent);
+    color: #fff;
+}
+
+.hero-image img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+}
+
+@media (max-width: 720px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+    .hero-image {
+        order: -1;
+        max-width: 220px;
+    }
+}
+
+
+/* =================================================================
+   Section shell
+   ================================================================= */
+
+.section {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 3.5rem) var(--gutter);
+    border-top: 1px solid var(--line);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.empty-note {
+    color: var(--ink-soft);
+    font-style: italic;
+}
+
+
+/* =================================================================
+   Skills — chips
+   ================================================================= */
+
+.chip-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.chip {
+    padding: 0.45rem 0.95rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+
+/* =================================================================
+   Projects — cards with drafting-corner frame
+   ================================================================= */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.75rem;
+}
+
+.card {
+    position: relative;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+}
+
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--gold);
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.card::after {
+    left: auto;
+    top: auto;
+    right: -1px;
+    bottom: -1px;
+    border: 2px solid var(--gold);
+    border-left: none;
+    border-top: none;
+}
+
+.card-media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+}
+
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.25rem 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-body h3 {
+    font-size: 1.15rem;
+}
+
+.card-body p {
+    font-size: 0.95rem;
+}
+
+.card-tech {
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-top: -0.4rem;
+}
+
+.card-links {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    display: flex;
+    gap: 1.25rem;
+    border-top: 1px solid var(--line);
+}
+
+.card-links a {
+    font-size: 0.88rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.card-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* =================================================================
+   Experience / education — ruled timeline
+   ================================================================= */
+
+.timeline {
+    position: relative;
+    padding-left: 1.75rem;
+    border-left: 2px solid var(--line);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.28rem;
+    top: 0.35rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.timeline-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.1rem;
+}
+
+.timeline-content h4 {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.35rem;
+}
+
+.timeline-date {
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+
+/* =================================================================
+   Resume CTA
+   ================================================================= */
+
+.resume-cta {
+    text-align: left;
+}
+
+
+/* =================================================================
+   About page
+   ================================================================= */
+
+.about-hero {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 5rem) var(--gutter) clamp(1.5rem, 4vw, 3rem);
+}
+
+.about-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    margin-bottom: 0.3rem;
+}
+
+.about-hero h2 {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+}
+
+.about-copy {
+    max-width: 68ch;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.about-copy p {
+    font-size: 1.02rem;
+}
+
+.about-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+
+/* =================================================================
+   Contact page
+   ================================================================= */
+
+.contact-hero {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 5rem) var(--gutter) clamp(3rem, 6vw, 5rem);
+}
+
+.contact-hero h1 {
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    margin-bottom: 0.6rem;
+}
+
+.contact-lead {
+    font-size: 1.02rem;
+    margin-bottom: 2.25rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-row label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.form-row .optional {
+    font-weight: 400;
+    color: var(--ink-soft);
+}
+
+.form-row input,
+.form-row textarea {
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    color: var(--ink);
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.7rem 0.85rem;
+    width: 100%;
+}
+
+.form-row textarea {
+    resize: vertical;
+    min-height: 8rem;
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.submit-btn {
+    align-self: flex-start;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 999px;
+    padding: 0.75rem 1.75rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.submit-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =================================================================
+   Footer
+   ================================================================= */
+
+.site-footer {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 2rem var(--gutter) 3rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+}

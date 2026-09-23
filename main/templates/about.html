@@ -1,9 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
 
     <title>About Me</title>
 </head>
@@ -12,92 +17,102 @@
 
     <!-- Navbar -->
 
-    <nav>
+    <header class="site-header">
+        <nav class="navbar">
 
-        <a href="{% url 'home' %}">Home</a>
+            <a class="brand" href="{% url 'home' %}">{{ profile.name }}</a>
 
-        <a href="{% url 'about' %}">About</a>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'contact' %}">Contact</a>
+                <a href="{% url 'resume' %}">Resume</a>
+            </div>
 
-        <a href="{% url 'contact' %}">Contact</a>
+            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                🌙
+            </button>
 
-        <a href="{% url 'resume' %}">Resume</a>
-
-    </nav>
+        </nav>
+    </header>
 
 
     <!-- About Section -->
 
-    <section>
+    <section class="about-hero">
 
-        <h1>ABOUT ME</h1>
+        <p class="eyebrow">About me</p>
+        <h1>Hi, I'm {{ profile.name }}.</h1>
+        <h2>{{ profile.title }}</h2>
 
-        <h2>
-            Hi, I'm {{ profile.name }}.
-        </h2>
+        <div class="about-copy">
 
-        <h3>
-            {{ profile.title }}
-        </h3>
+            <p>
+                I'm a Computer Science Engineering student and aspiring
+                Python/Django developer with a strong interest in machine
+                learning and backend development.
+            </p>
 
+            <p>
+                I enjoy building practical web applications and intelligent
+                solutions using technologies such as
+                {% for skill in skills %}{% if skill.name != "Machine Learning" %}{{ skill.name }}, {% endif %}{% endfor %}
+                and machine learning. I've worked on projects including
+                real-time chat applications, news and weather apps, machine
+                learning prediction systems, spam email detection, customer
+                churn prediction, and demand forecasting.
+            </p>
 
-        <p>
-            Hi, I'm {{ profile.name }}, a Computer Science
-            Engineering student and aspiring Python/Django Developer
-            with a strong interest in Machine Learning and backend
-            development.
-        </p>
+            <p>
+                I'm continuously improving my skills in software development,
+                machine learning, databases, APIs, and deployment. I enjoy
+                learning new technologies, solving problems through code,
+                and turning ideas into functional applications.
+            </p>
 
-        <p>
-            I enjoy building practical web applications and intelligent
-            solutions using technologies such as {% for skill in skills %} {% if skill.name != "Machine Learning" %} {{ skill.name}}, {% endif %} {% endfor %} and Machine Learning. I have
-            worked on projects including real-time chat applications,
-            news and weather applications, machine learning prediction
-            systems, spam email detection, customer churn prediction,
-            and demand forecasting.
-        </p>
+            <p>
+                My goal is to grow as a software developer and build reliable,
+                user-focused applications while continuing to explore the
+                possibilities of machine learning and artificial intelligence.
+            </p>
 
-        <p>
-            I am continuously improving my skills in software development,
-            machine learning, databases, APIs, and deployment. I enjoy
-            learning new technologies, solving problems through code,
-            and turning ideas into functional applications.
-        </p>
-
-        <p>
-            My goal is to grow as a software developer and build reliable,
-            user-focused applications while continuing to explore the
-            possibilities of Machine Learning and Artificial Intelligence.
-        </p>
-
-
-        <!-- Skills -->
-
-        <h2>Skills</h2>
-
-        <ul>
-        {% for skill in skills %}
-
-            <li>{{ skill.name }}</li>
-
-        {% endfor %}
-        </ul>
-
-
-        <!-- Buttons / Links -->
-
-        <p>
-            <a href="{% url 'home' %}">
-                View My Projects
-            </a>
-        </p>
-
-        <p>
-            <a href="{% url 'resume' %}">
-                Download Resume
-            </a>
-        </p>
+        </div>
 
     </section>
+
+
+    <!-- Skills -->
+
+    <section class="section">
+
+        <h2 class="section-title">Skills</h2>
+
+        <ul class="chip-list">
+            {% for skill in skills %}
+            <li class="chip">{{ skill.name }}</li>
+            {% empty %}
+            <li class="empty-note">No skills added yet.</li>
+            {% endfor %}
+        </ul>
+
+    </section>
+
+
+    <!-- Buttons / Links -->
+
+    <section class="section about-cta">
+
+        <a class="pill-link pill-link--solid" href="{% url 'home' %}">
+            View my projects
+        </a>
+
+        <a class="pill-link" href="{% url 'resume' %}">
+            Download resume
+        </a>
+
+    </section>
+
+    <script src="{% static 'js/index.js' %}"></script>
 
 </body>
 

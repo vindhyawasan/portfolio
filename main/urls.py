@@ -7,7 +7,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('/about', views.about, name='about'),
     path('/resume', views.resume, name='resume'),
-    path('/contact', views.contact, name='contact')
+    path('/contact', views.contact, name='contact'),
 ]
 
 urlpatterns += static(

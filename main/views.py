@@ -33,7 +33,8 @@ def home(request):
                                           "profile" : profile,
                                           "skills" : skill,
                                           "education" : education,
-                                          "projects" : project})
+                                          "projects" : project,
+                                          "experiences" : experience})
 
 def about(request):
     skill = Skill.objects.all()
