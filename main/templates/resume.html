@@ -1,22 +1,78 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Resume</title>
 </head>
+
 <body>
-    <nav>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'contact' %}">Contact</a>
-        <a href="{% url 'resume' %}">Resume</a>
-    </nav>
-    <hr>
-    <h2>{{resume.title}}</h2>
-    {% if resume %}
-    <a href="{{ resume.file }}", target="_blank">view resume</a> <br>
-    <a href="{{ resume.file }}", download="">download resume</a>
-    {% endif %}
+
+    <!-- Navbar -->
+
+    <header class="site-header">
+        <nav class="navbar">
+
+            <a class="brand" href="{% url 'home' %}">{{ profile.name }}</a>
+
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'contact' %}">Contact</a>
+                <a href="{% url 'resume' %}">Resume</a>
+            </div>
+
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle light mode">
+                🌙
+            </button>
+
+        </nav>
+    </header>
+
+
+    <!-- Resume -->
+
+    <section class="resume-hero">
+
+        <p class="eyebrow">Resume</p>
+        <h1>{{ resume.title }}</h1>
+
+        {% if resume %}
+
+        <p class="resume-lead">
+            View it in the browser or download a copy to keep.
+        </p>
+
+        <div class="resume-actions">
+            <a class="pill-link pill-link--solid" href="{{ resume.file.url }}" target="_blank" rel="noopener">
+                View resume
+            </a>
+            <a class="pill-link" href="{{ resume.file.url }}" download>
+                Download resume
+            </a>
+        </div>
+
+        <div class="resume-preview">
+            <iframe src="{{ resume.file.url }}" title="{{ resume.title }}"></iframe>
+        </div>
+
+        {% else %}
+
+        <p class="empty-note">No resume has been uploaded yet.</p>
+
+        {% endif %}
+
+    </section>
+
+    <script src="{% static 'js/index.js' %}"></script>
+
 </body>
+
 </html>

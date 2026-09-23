@@ -29,7 +29,7 @@
                 <a href="{% url 'contact' %}">Contact</a>
             </div>
 
-            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle light mode">
                 🌙
             </button>
 
@@ -46,9 +46,7 @@
             <h1>{{ profile.name }}</h1>
             <h2>{{ profile.title }}</h2>
 
-            <p class="bio">
-                {{ profile.bio }}
-            </p>
+            <p class="bio">{{ profile.bio }}</p>
 
             <dl class="contact-meta">
                 <div>
@@ -67,10 +65,10 @@
 
             <div class="hero-links">
                 {% if profile.github %}
-                <a class="pill-link" href="{{ profile.github }}" target="_blank">GitHub</a>
+                <a class="pill-link" href="{{ profile.github }}" target="_blank" rel="noopener">GitHub</a>
                 {% endif %}
                 {% if profile.linkedin %}
-                <a class="pill-link" href="{{ profile.linkedin }}" target="_blank">LinkedIn</a>
+                <a class="pill-link" href="{{ profile.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
                 {% endif %}
             </div>
         </div>
@@ -87,36 +85,25 @@
     <!-- ================= SKILLS ================= -->
 
     <section class="section">
-
         <h2 class="section-title">Skills</h2>
 
         <ul class="chip-list">
-
             {% for skill in skills %}
-
             <li class="chip">{{ skill.name }}</li>
-
             {% empty %}
-
             <li class="empty-note">No skills added yet.</li>
-
             {% endfor %}
-
         </ul>
-
     </section>
 
 
     <!-- ================= PROJECTS ================= -->
 
     <section class="section">
-
         <h2 class="section-title">Projects</h2>
 
         <div class="card-grid">
-
             {% for project in projects %}
-
             <article class="card">
 
                 {% if project.image %}
@@ -126,9 +113,7 @@
                 {% endif %}
 
                 <div class="card-body">
-
                     <h3>{{ project.title }}</h3>
-
                     <p>{{ project.description }}</p>
 
                     {% if project.technologies %}
@@ -137,131 +122,84 @@
 
                     <div class="card-links">
                         {% if project.github_link %}
-                        <a href="{{ project.github_link }}" target="_blank">Code</a>
+                        <a href="{{ project.github_link }}" target="_blank" rel="noopener">Code</a>
                         {% endif %}
-
                         {% if project.link %}
-                        <a href="{{ project.link }}" target="_blank">Live&nbsp;site</a>
+                        <a href="{{ project.link }}" target="_blank" rel="noopener">Live&nbsp;site</a>
                         {% endif %}
                     </div>
-
                 </div>
 
             </article>
-
             {% empty %}
-
             <p class="empty-note">No projects added yet.</p>
-
             {% endfor %}
-
         </div>
-
     </section>
 
 
     <!-- ================= EXPERIENCE ================= -->
 
     <section class="section">
-
         <h2 class="section-title">Experience</h2>
 
         <div class="timeline">
-
             {% for exp in experiences %}
-
             <div class="timeline-item">
-
                 <div class="timeline-marker"></div>
-
                 <div class="timeline-content">
                     <h3>{{ exp.job_title }}</h3>
                     <h4>{{ exp.company }}</h4>
-
                     <p class="timeline-date">
                         {{ exp.start_date }} &ndash;
-                        {% if exp.currently_working %}
-                        Present
-                        {% else %}
-                        {{ exp.end_date }}
-                        {% endif %}
+                        {% if exp.currently_working %}Present{% else %}{{ exp.end_date }}{% endif %}
                     </p>
-
                     <p>{{ exp.description }}</p>
                 </div>
-
             </div>
-
             {% empty %}
-
             <p class="empty-note">No experience added yet.</p>
-
             {% endfor %}
-
         </div>
-
     </section>
 
 
     <!-- ================= EDUCATION ================= -->
 
     <section class="section">
-
         <h2 class="section-title">Education</h2>
 
         <div class="timeline">
-
             {% for edu in education %}
-
             <div class="timeline-item">
-
                 <div class="timeline-marker"></div>
-
                 <div class="timeline-content">
                     <h3>{{ edu.degree }}</h3>
                     <h4>{{ edu.institution }}</h4>
-
-                    <p class="timeline-date">
-                        {{ edu.start_year }} &ndash; {{ edu.end_year }}
-                    </p>
-
+                    <p class="timeline-date">{{ edu.start_year }} &ndash; {{ edu.end_year }}</p>
                     <p>{{ edu.description }}</p>
                 </div>
-
             </div>
-
             {% empty %}
-
             <p class="empty-note">No education added yet.</p>
-
             {% endfor %}
-
         </div>
-
     </section>
 
 
     <!-- ================= RESUME ================= -->
 
     <section class="section resume-cta">
-
         <h2 class="section-title">Resume</h2>
-
-        <p>Want the full picture &mdash; education, skills and project history in one place?</p>
-
-        <a class="pill-link pill-link--solid" href="{% url 'resume' %}">
-            View my resume
-        </a>
-
+        <p>Want to know more about my education, skills and projects?</p>
+        <a class="pill-link pill-link--solid" href="{% url 'resume' %}">View my resume</a>
     </section>
 
 
     <!-- ================= FOOTER ================= -->
 
     <footer class="site-footer">
-
         <p>&copy; {{ profile.name }}</p>
-
     </footer>
 
     <script src="{% static 'js/index.js' %}"></script>
